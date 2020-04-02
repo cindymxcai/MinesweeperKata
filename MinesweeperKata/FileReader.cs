@@ -12,7 +12,9 @@ namespace MinesweeperKata
         public string[] ReadFile(string fileName)
         {
             var readValues = new string[] { };
-            return readValues;
+
+            return null;
+
         }
     }
 }

@@ -22,8 +22,13 @@ namespace MinesweeperTests
         public void StopSettingRowsWhenZeroRead()
         {
             var inputReader = new InputReader();
-            var fileReader = new FileReader();
-            
+            var fileReader = new TestFileReader(new[]{"33",".*.", "00", ".**", "..."});
+            var valueArray = fileReader.ReadFile("ignored");
+            var createdField = inputReader.readField(valueArray);
+            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Mine,CellType.Empty}, createdField.GetRow(0));
+            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Empty, CellType.Empty}, createdField.GetRow(2));
+
+
         }
         private class TestFileReader : IFileReader
         {

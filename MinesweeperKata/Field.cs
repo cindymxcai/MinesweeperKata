@@ -47,7 +47,6 @@ namespace MinesweeperKata
             }
         }
 
-        //row number current: which row to get.
         public List<CellType> GetRow(int rowNumber)
         {
             var rowList = new List<CellType>();

@@ -13,7 +13,6 @@ namespace MinesweeperKata
         public Field readField(string[] valueArray)
         {
             var lineParser = new LineParser();
-            var number = 0;
             var index = 0;
             bool readingSize = true;
             Field createdField = null;
@@ -28,8 +27,15 @@ namespace MinesweeperKata
                 }
                 else
                 {
-                    createdField?.SetRow(index, lineParser.GetFieldRow(line));
-                    index++;
+                    if (line == "00")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        createdField.SetRow(index, lineParser.GetFieldRow(line));
+                        index++;
+                    }
                 }
             }
 
