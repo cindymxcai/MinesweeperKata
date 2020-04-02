@@ -32,26 +32,34 @@ namespace MinesweeperKata
 
         public void SetRow(int rowNumber, IEnumerable<CellType> row)
         {
-            try
+            int index = 0;
+            while (index < _rows)
             {
-                var item = 0;
-                foreach (var c in row)
+                try
                 {
-                    _minesweeperField[rowNumber, item] = c;
-                    item++;
+                    var item = 0;
+                    foreach (var c in row)
+                    {
+                        _minesweeperField[rowNumber, item] = c;
+                        item++;
+                    }
                 }
+                catch (Exception e)
+                {
+                    throw new RowSetterException("Invalid Row Input", e);
+                }
+
+                index++;
             }
-            catch (Exception e)
-            {
-                throw new RowSetterException("Invalid Row Input", e);
-            }
+            
         }
 
+        //row number current: which row to get.
         public List<CellType> GetRow(int rowNumber)
         {
             var rowList = new List<CellType>();
             int index = 0;
-            while (index <= rowNumber)
+            while (index < _rows)
             {
                 for (var i = 0; i < _cols; i++)
                 {
