@@ -1,7 +1,7 @@
 namespace MinesweeperKata
 {
-    public class OutputWriter
+    public class InputReader
     {
-       
+        
     }
 }

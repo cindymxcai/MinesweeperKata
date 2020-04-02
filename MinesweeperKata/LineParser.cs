@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MinesweeperKata
 {
-    public class LineParser
+    public class LineParser : ILineParser
     {
         public (int,int) GetSize(string sizeLine)
         {

@@ -7,15 +7,13 @@ namespace MinesweeperKata
     {
         private readonly int _cols;
         private readonly int _rows;
-        private CellType[,] _minesweeperField;
-        private readonly LineParser _lineParser = new LineParser();
+        private readonly CellType[,] _minesweeperField;
 
         public Field(int col, int row)
         {
             _cols = col;
             _rows = row;
             _minesweeperField = new CellType[_rows, _cols];
-          
             for (var r = 0; r < _rows; r++)
             {
                 for (var c = 0; c < _cols; c++)
@@ -24,37 +22,61 @@ namespace MinesweeperKata
                 }
             }
         }
-        
-  
-            //add mines to minesweeperfield from line parser
-            //getfieldrow from lineparser and set first row 
-            //line parser gets next line from input
-            //set rows...until x size
-            
-            //loop through file and set rows 
-            
-            
 
-        public void SetRow( int rowNumber,List<CellType> row)
+        //add mines to minesweeperfield from line parser
+        //getfieldrow from lineparser and set first row 
+        //line parser gets next line from input
+        //set rows...until x size
+
+        //loop through file and set rows 
+
+        public void SetRow(int rowNumber, IEnumerable<CellType> row)
         {
-            var item = 0;
-
-            foreach (var c in row)
+            try
             {
-                _minesweeperField[rowNumber, item] = c;
-                item++;
+                var item = 0;
+                foreach (var c in row)
+                {
+                    _minesweeperField[rowNumber, item] = c;
+                    item++;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new RowSetterException("Invalid Row Input", e);
             }
         }
 
         public List<CellType> GetRow(int rowNumber)
         {
             var rowList = new List<CellType>();
-            for (var i = 0; i < _cols; i++)
+            int index = 0;
+            while (index <= rowNumber)
             {
-               rowList.Add(_minesweeperField[rowNumber, i]);
-            }
+                for (var i = 0; i < _cols; i++)
+                {
+                    rowList.Add(_minesweeperField[rowNumber, i]);
+                }
 
+                index++;
+            }
             return rowList;
+        }
+        
+
+        public char[,] SetField(IEnumerable<CellType> rowList)
+        {
+            var field = new char[,]{};
+            
+            return field;
+        }
+    }
+    
+
+    public class RowSetterException : Exception
+    {
+        public RowSetterException(string message, Exception exception) : base(message, exception)
+        {
         }
     }
 }
