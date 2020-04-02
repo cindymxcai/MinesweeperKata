@@ -32,53 +32,53 @@ namespace MinesweeperKata
 
         public void SetRow(int rowNumber, IEnumerable<CellType> row)
         {
-            int index = 0;
-            while (index < _rows)
+            try
             {
-                try
+                var item = 0;
+                foreach (var c in row)
                 {
-                    var item = 0;
-                    foreach (var c in row)
-                    {
-                        _minesweeperField[rowNumber, item] = c;
-                        item++;
-                    }
+                    _minesweeperField[rowNumber, item] = c;
+                    item++;
                 }
-                catch (Exception e)
-                {
-                    throw new RowSetterException("Invalid Row Input", e);
-                }
-
-                index++;
             }
-            
+            catch (Exception e)
+            {
+                throw new RowSetterException("Invalid Row Input", e);
+            }
         }
 
         //row number current: which row to get.
         public List<CellType> GetRow(int rowNumber)
         {
             var rowList = new List<CellType>();
-            int index = 0;
-            while (index < _rows)
+
+            try
             {
                 for (var i = 0; i < _cols; i++)
                 {
                     rowList.Add(_minesweeperField[rowNumber, i]);
                 }
-
-                index++;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+                
+            
             return rowList;
         }
         
 
-        public char[,] SetField(IEnumerable<CellType> rowList)
+        /*public CellType[,] SetField(IEnumerable<CellType> rowList)
         {
             var field = new char[,]{};
             
             return field;
-        }
+        }*/
     }
+    
+    //calculate hint field method
     
 
     public class RowSetterException : Exception

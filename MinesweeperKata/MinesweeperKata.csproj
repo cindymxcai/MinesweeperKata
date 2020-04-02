@@ -40,7 +40,9 @@
     <ItemGroup>
         <Compile Include="CellType.cs" />
         <Compile Include="Field.cs" />
+        <Compile Include="FileReader.cs" />
         <Compile Include="HintFieldCalculator.cs" />
+        <Compile Include="IInputReader.cs" />
         <Compile Include="ILineParser.cs" />
         <Compile Include="InputReader.cs" />
         <Compile Include="LineParser.cs" />

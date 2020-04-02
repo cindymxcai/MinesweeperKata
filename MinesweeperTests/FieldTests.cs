@@ -25,18 +25,18 @@ namespace MinesweeperTests
 
         //not throwing exception properly?
         
-        /*[Theory]
+        [Theory]
         [InlineData(1,5, CellType.Empty, CellType.Empty)]
-        public void SetRowWithInvalidInputShouldThrowException(int col, int row, CellType cell1, CellType cell2)
+        public void SetRowWithInvalidInputShouldThrowException(int row, int col, CellType cell1, CellType cell2)
         {
             var field = new Field(col,row);
             var rowInput = new List<CellType>(){cell1, cell2};
             field.SetRow(0, rowInput);
             Assert.Throws<RowSetterException>(() => field.GetRow(1));
-        }*/
+        }
 
         //[Fact]
-        public void SetField()
+        /*public void SetField()
         {
          var field = new Field(2,2);
          var row = new List<CellType>(){CellType.Empty, CellType.Empty, CellType.Mine, CellType.Empty};
@@ -44,7 +44,7 @@ namespace MinesweeperTests
           var setRows = field.GetRow(0);
          field.SetField(setRows);
 
-        }
+        }*/
     }
 
     

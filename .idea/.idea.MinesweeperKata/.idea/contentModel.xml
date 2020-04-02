@@ -8,7 +8,9 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="CellType.cs" t="Include" />
         <e p="Field.cs" t="Include" />
+        <e p="FileReader.cs" t="Include" />
         <e p="HintFieldCalculator.cs" t="Include" />
+        <e p="IInputReader.cs" t="Include" />
         <e p="ILineParser.cs" t="Include" />
         <e p="InputReader.cs" t="Include" />
         <e p="LineParser.cs" t="Include" />
@@ -23,6 +25,7 @@
       <e p="MinesweeperTests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="FieldTests.cs" t="Include" />
+        <e p="InputTests.cs" t="Include" />
         <e p="MinesweeperTests.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="ParsingTests.cs" t="Include" />
