@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+
 namespace MinesweeperKata
 {
     public interface IFileReader
@@ -7,13 +10,15 @@ namespace MinesweeperKata
 
     public class FileReader : IFileReader
     {
-        //read fields until 00
-
         public string[] ReadFile(string fileName)
         {
-            var readValues = new string[] { };
-
-            return null;
+            var readValues = File.ReadAllLines("input.txt");
+            foreach (var line in readValues)
+            {
+                Console.WriteLine(line);
+                
+            }
+            return readValues;
 
         }
     }

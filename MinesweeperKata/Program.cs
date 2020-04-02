@@ -6,6 +6,8 @@ namespace MinesweeperKata
     {
         public static void Main(string[] args)
         {
+            var fr = new FileReader();
+            fr.ReadFile("name");
         }
     }
 }
