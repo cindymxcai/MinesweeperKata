@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace MinesweeperKata
 {
@@ -6,8 +7,12 @@ namespace MinesweeperKata
     {
         public static void Main(string[] args)
         {
+            InputReader  ip = new InputReader();
             var fr = new FileReader();
-            fr.ReadFile("name");
+            var valueArray = fr.ReadFile("/Users/cindy.cai/RiderProjects/MinesweeperKata/input.txt");
+            var createdField = ip.readField(valueArray);
+            ip.ReadAllFields(createdField);
+
         }
     }
 }

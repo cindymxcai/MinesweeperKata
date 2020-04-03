@@ -12,7 +12,7 @@ namespace MinesweeperKata
     {
         public string[] ReadFile(string fileName)
         {
-            var readValues = File.ReadAllLines("input2.txt");
+            var readValues = File.ReadAllLines(fileName);
             
             foreach (var line in readValues)
             {

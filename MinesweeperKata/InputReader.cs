@@ -4,38 +4,41 @@ namespace MinesweeperKata
 {
     public class InputReader : IInputReader
     {
+        public readonly List<Field> AllFields = new List<Field>();
 
-        public List<Field> ReadAllFields(string[] valueArray)
+
+        public void ReadAllFields(Field createdField)
         {
-            var allFields = new List<Field>();
-            return allFields;
+            AllFields.Add(createdField);
         }
+
         public Field readField(string[] valueArray)
         {
             var lineParser = new LineParser();
             var index = 0;
-            bool readingSize = true;
             Field createdField = null;
             
             foreach (var line in valueArray)
             {
-                if (readingSize) 
-                {
-                    var (row, col) = lineParser.GetSize(line);
-                    createdField = new Field(col,row);
-                    readingSize = false;
-                }
-                else
+                if (int.TryParse(line, out _))
                 {
                     if (line == "00")
                     {
+                        ReadAllFields(createdField);
                         break;
                     }
                     else
                     {
-                        createdField.SetRow(index, lineParser.GetFieldRow(line));
-                        index++;
+                        index = 0;
+                        var (row, col) = lineParser.GetSize(line);
+                        ReadAllFields(createdField);
+                        createdField = new Field(col, row);
                     }
+                }
+                else
+                {
+                    createdField?.SetRow(index, lineParser.GetFieldRow(line));
+                    index++;
                 }
             }
 
