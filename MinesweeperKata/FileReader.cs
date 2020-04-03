@@ -3,11 +3,6 @@ using System.IO;
 
 namespace MinesweeperKata
 {
-    public interface IFileReader
-    {
-        string[] ReadFile(string fileName);
-    }
-
     public class FileReader : IFileReader
     {
         public string[] ReadFile(string fileName)

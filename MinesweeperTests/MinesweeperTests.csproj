@@ -52,6 +52,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="FieldTests.cs" />
+        <Compile Include="HintCalculatorTests.cs" />
         <Compile Include="InputTests.cs" />
         <Compile Include="ParsingTests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

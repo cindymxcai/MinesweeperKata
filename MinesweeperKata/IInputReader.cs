@@ -2,6 +2,6 @@ namespace MinesweeperKata
 {
     public interface IInputReader
     {
-        Field readField(string[] valueArray);
+        Field ReadField(string[] valueArray);
     }
 }

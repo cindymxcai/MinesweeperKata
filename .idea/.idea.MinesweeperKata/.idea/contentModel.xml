@@ -10,6 +10,9 @@
         <e p="Field.cs" t="Include" />
         <e p="FileReader.cs" t="Include" />
         <e p="HintFieldCalculator.cs" t="Include" />
+        <e p="IField.cs" t="Include" />
+        <e p="IFileReader.cs" t="Include" />
+        <e p="IHintFieldCalculator.cs" t="Include" />
         <e p="IInputReader.cs" t="Include" />
         <e p="ILineParser.cs" t="Include" />
         <e p="InputReader.cs" t="Include" />
@@ -25,6 +28,7 @@
       <e p="MinesweeperTests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="FieldTests.cs" t="Include" />
+        <e p="HintCalculatorTests.cs" t="Include" />
         <e p="InputTests.cs" t="Include" />
         <e p="MinesweeperTests.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive" />

@@ -1,7 +1,17 @@
+using System.Collections.Generic;
+
 namespace MinesweeperKata
 {
-    public class HintFieldCalculator
+    public class HintFieldCalculator : IHintFieldCalculator
     {
-        
+
+
+        public Field CalculateDistances(Field inputField)
+        {
+            Field hintField = null;
+            
+            return hintField;
+        }
+
     }
 }

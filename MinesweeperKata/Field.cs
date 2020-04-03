@@ -3,18 +3,17 @@ using System.Collections.Generic;
 
 namespace MinesweeperKata
 {
-    public class Field
+    public class Field : IField
     {
         private readonly int _cols;
-        private readonly int _rows;
         private readonly CellType[,] _minesweeperField;
 
         public Field(int col, int row)
         {
             _cols = col;
-            _rows = row;
-            _minesweeperField = new CellType[_rows, _cols];
-            for (var r = 0; r < _rows; r++)
+            var rows = row;
+            _minesweeperField = new CellType[rows, _cols];
+            for (var r = 0; r < rows; r++)
             {
                 for (var c = 0; c < _cols; c++)
                 {
@@ -23,13 +22,7 @@ namespace MinesweeperKata
             }
         }
 
-        //add mines to minesweeperfield from line parser
-        //getfieldrow from lineparser and set first row 
-        //line parser gets next line from input
-        //set rows...until x size
-
-        //loop through file and set rows 
-
+      
         public void SetRow(int rowNumber, IEnumerable<CellType> row)
         {
             try
@@ -68,17 +61,7 @@ namespace MinesweeperKata
             return rowList;
         }
         
-
-        /*public CellType[,] SetField(IEnumerable<CellType> rowList)
-        {
-            var field = new char[,]{};
-            
-            return field;
-        }*/
     }
-    
-    //calculate hint field method
-    
 
     public class RowSetterException : Exception
     {

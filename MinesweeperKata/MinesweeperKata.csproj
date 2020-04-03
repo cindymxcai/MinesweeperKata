@@ -42,6 +42,9 @@
         <Compile Include="Field.cs" />
         <Compile Include="FileReader.cs" />
         <Compile Include="HintFieldCalculator.cs" />
+        <Compile Include="IField.cs" />
+        <Compile Include="IFileReader.cs" />
+        <Compile Include="IHintFieldCalculator.cs" />
         <Compile Include="IInputReader.cs" />
         <Compile Include="ILineParser.cs" />
         <Compile Include="InputReader.cs" />

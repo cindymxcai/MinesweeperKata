@@ -12,7 +12,7 @@ namespace MinesweeperKata
             AllFields.Add(createdField);
         }
 
-        public Field readField(string[] valueArray)
+        public Field ReadField(string[] valueArray)
         {
             var lineParser = new LineParser();
             var index = 0;
