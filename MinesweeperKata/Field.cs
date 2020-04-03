@@ -5,11 +5,13 @@ namespace MinesweeperKata
 {
     public class Field : IField
     {
+        public int numberOfRows { get; }
         private readonly int _cols;
         private readonly CellType[,] _minesweeperField;
 
         public Field(int col, int row)
         {
+            numberOfRows = row;
             _cols = col;
             var rows = row;
             _minesweeperField = new CellType[rows, _cols];
@@ -36,7 +38,7 @@ namespace MinesweeperKata
             }
             catch (Exception e)
             {
-                throw new RowSetterException("Invalid Row Input", e);
+                throw new RowSetterException("Invalid numberOfRows Input", e);
             }
         }
 

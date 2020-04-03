@@ -4,42 +4,51 @@ namespace MinesweeperKata
 {
     public class InputReader : IInputReader
     {
-        public readonly List<Field> AllFields = new List<Field>();
 
 
-        public void ReadAllFields(Field createdField)
+        public List<Field> ReadAllFields(string [] valueArray)
         {
-            AllFields.Add(createdField);
+            var index = 0;
+            var allFields = new List<Field>();
+            var currentField = ReadField(valueArray, index);
+            if (currentField == null)
+            {
+                return allFields;
+            }
+            
+            allFields.Add(currentField);
+            index += currentField.numberOfRows+1;
+            
+            while (currentField != null)
+            {
+                currentField = ReadField(valueArray,  index);
+                if (currentField == null)
+                {
+                    return allFields;
+                }
+                allFields.Add(currentField);
+                index += currentField.numberOfRows+1;
+            }
+
+            return allFields;
         }
 
-        public Field ReadField(string[] valueArray)
+        public Field ReadField(string[] valueArray, int index )
         {
             var lineParser = new LineParser();
-            var index = 0;
             Field createdField = null;
-            
-            foreach (var line in valueArray)
+
+            var (row, col) = lineParser.GetSize(valueArray[index]);
+            if ((row, col) == (0, 0))
             {
-                if (int.TryParse(line, out _))
-                {
-                    if (line == "00")
-                    {
-                        ReadAllFields(createdField);
-                        break;
-                    }
-                    else
-                    {
-                        index = 0;
-                        var (row, col) = lineParser.GetSize(line);
-                        ReadAllFields(createdField);
-                        createdField = new Field(col, row);
-                    }
-                }
-                else
-                {
-                    createdField?.SetRow(index, lineParser.GetFieldRow(line));
-                    index++;
-                }
+                return null;
+            }
+            index++;
+            createdField = new Field(col, row);
+            for (var i = 0; i < row; i++)
+            {
+                createdField.SetRow(i, lineParser.GetFieldRow(valueArray[index]));
+                index++;
             }
 
             return createdField;

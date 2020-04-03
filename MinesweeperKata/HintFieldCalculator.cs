@@ -13,5 +13,6 @@ namespace MinesweeperKata
             return hintField;
         }
 
+        //second method for every field
     }
 }
