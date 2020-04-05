@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using MinesweeperKata;
 using Xunit;
 
@@ -54,38 +53,12 @@ namespace MinesweeperTests
         public void ReadAllFieldsShouldReturnManyFields()
         {
             var inputReader = new InputReader();
-            var fileReader = new TestFileReader(new[]{"33",".*.", ".**", "...", "22", ".*", "..","00"});
+            var fileReader = new TestFileReader(new[] {"33", ".*.", ".**", "...", "22", ".*", "..", "00"});
             var valueArray = fileReader.ReadFile();
             var createdFields = inputReader.ReadAllFields(valueArray);
-            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Mine, CellType.Empty}, createdFields[0].GetRow(0));
-            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Mine}, createdFields[1].GetRow(0));
-        }
-
-    
-        
-        
-        private class TestFileReader : IFileReader
-        {
-            private  string[] _stringArray;
-
-            public TestFileReader(string[] stringArray)
-            {
-                _stringArray = stringArray;
-            }
-
-            public TestFileReader()
-            {
-            }
-            
-            public string[] ReadFile(string fileName)
-            {
-                return _stringArray = File.ReadAllLines(fileName);
-            }
-
-            public string[] ReadFile()
-            {
-                return _stringArray;
-            }
+            Assert.Equal(new List<CellType>() {CellType.Empty, CellType.Mine, CellType.Empty},
+                createdFields[0].GetRow(0));
+            Assert.Equal(new List<CellType>() {CellType.Empty, CellType.Mine}, createdFields[1].GetRow(0));
         }
     }
 }

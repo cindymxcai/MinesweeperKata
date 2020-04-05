@@ -17,8 +17,9 @@ namespace MinesweeperKata
             }
             
             allFields.Add(currentField);
-            index += currentField.numberOfRows+1;
+            index += currentField.NumberOfRows+1;
             
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             while (currentField != null)
             {
                 currentField = ReadField(valueArray,  index);
@@ -27,7 +28,7 @@ namespace MinesweeperKata
                     return allFields;
                 }
                 allFields.Add(currentField);
-                index += currentField.numberOfRows+1;
+                index += currentField.NumberOfRows+1;
             }
 
             return allFields;
@@ -36,7 +37,6 @@ namespace MinesweeperKata
         public Field ReadField(string[] valueArray, int index )
         {
             var lineParser = new LineParser();
-            Field createdField = null;
 
             var (row, col) = lineParser.GetSize(valueArray[index]);
             if ((row, col) == (0, 0))
@@ -44,7 +44,7 @@ namespace MinesweeperKata
                 return null;
             }
             index++;
-            createdField = new Field(col, row);
+            var createdField = new Field(col, row);
             for (var i = 0; i < row; i++)
             {
                 createdField.SetRow(i, lineParser.GetFieldRow(valueArray[index]));

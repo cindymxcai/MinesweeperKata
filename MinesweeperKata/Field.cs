@@ -5,19 +5,20 @@ namespace MinesweeperKata
 {
     public class Field : IField
     {
-        public int numberOfRows { get; }
-        private readonly int _cols;
+        public int NumberOfRows { get; }
+        public int NumberOfCols { get; }
         private readonly CellType[,] _minesweeperField;
 
         public Field(int col, int row)
         {
-            numberOfRows = row;
-            _cols = col;
+            NumberOfRows = row;
+            NumberOfCols = col;
             var rows = row;
-            _minesweeperField = new CellType[rows, _cols];
+            var cols = col;
+            _minesweeperField = new CellType[rows, cols];
             for (var r = 0; r < rows; r++)
             {
-                for (var c = 0; c < _cols; c++)
+                for (var c = 0; c < cols; c++)
                 {
                     _minesweeperField[r, c] = CellType.Empty;
                 }
@@ -48,7 +49,7 @@ namespace MinesweeperKata
 
             try
             {
-                for (var i = 0; i < _cols; i++)
+                for (var i = 0; i < NumberOfCols; i++)
                 {
                     rowList.Add(_minesweeperField[rowNumber, i]);
                 }

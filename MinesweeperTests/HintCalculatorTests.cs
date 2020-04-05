@@ -1,27 +1,27 @@
+using System.Collections.Generic;
+using MinesweeperKata;
+using Xunit;
+
 namespace MinesweeperTests
 {
     public class HintCalculatorTests
     {
-        /*function Dijkstra(Graph, source):
-            2:	for each vertex v in Graph:	// Initialization
-        3:	dist[v] := infinity	// initial distance from source to vertex v is set to infinite
-        4:	previous[v] := undefined	// Previous node in optimal path from source
-        5:	dist[source] := 0	// Distance from source to source
-        6:	Q := the set of all nodes in Graph	// all nodes in the graph are unoptimized - thus are in Q
-        7:	while Q is not empty:	// main loop
-        8:	u := node in Q with smallest dist[ ]
-            9:	remove u from Q
-        10:	for each neighbor v of u:	// where v has not yet been removed from Q.
-        11:	alt := dist[u] + dist_between(u, v)
-            12:	if alt < dist[v]	// Relax (u,v)
-        13:	dist[v] := alt
-        14:	previous[v] := u
-        15:	return previous[ ]*/
-        
-        //if overlap,add
-        
-        //eg *12*
-        //   11*
-        //   011
+        [Fact]
+        public void ConvertFieldToArray()
+        {
+            var inputReader = new InputReader();
+            var fileReader = new TestFileReader(new[]{"22", ".*", "**"});
+            var valueArray = fileReader.ReadFile();
+            var createdField = inputReader.ReadField(valueArray,0);
+            var hintFieldCalculator = new HintFieldCalculator();
+            var hintArray = hintFieldCalculator.ConvertToArray(createdField);
+            Assert.Equal( 4, hintArray.Length);
+            Assert.Equal(CellType.Empty,hintArray[0,0]);
+            Assert.Equal(CellType.Mine, hintArray[0,1]);
+            Assert.Equal(CellType.Mine, hintArray[1,0]);
+            Assert.Equal(CellType.Mine, hintArray[1,1]);
+
+        }
+ 
     }
 }
