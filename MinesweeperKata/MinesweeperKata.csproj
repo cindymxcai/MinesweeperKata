@@ -47,9 +47,9 @@
         <Compile Include="IField.cs" />
         <Compile Include="IFileReader.cs" />
         <Compile Include="IHintFieldCalculator.cs" />
-        <Compile Include="IInputReader.cs" />
+        <Compile Include="IFieldBuilder.cs" />
         <Compile Include="ILineParser.cs" />
-        <Compile Include="InputReader.cs" />
+        <Compile Include="FieldBuilder.cs" />
         <Compile Include="LineParser.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

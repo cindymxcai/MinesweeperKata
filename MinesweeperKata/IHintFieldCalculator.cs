@@ -3,6 +3,6 @@ namespace MinesweeperKata
     public interface IHintFieldCalculator
     {
         CellType[,] ConvertToArray(Field inputField);
-        Field CalculateDistances(string[] inputArray);
+        string[,] CalculateNumberOfSurroundingMines(CellType[,] inputArray, Field inputField);
     }
 }

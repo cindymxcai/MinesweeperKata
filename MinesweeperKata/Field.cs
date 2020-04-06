@@ -59,8 +59,6 @@ namespace MinesweeperKata
                 Console.WriteLine(e);
                 throw;
             }
-                
-            
             return rowList;
         }
         

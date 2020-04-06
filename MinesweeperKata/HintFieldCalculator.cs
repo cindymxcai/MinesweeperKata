@@ -1,17 +1,17 @@
 
 using System;
+using System.Linq;
 
 namespace MinesweeperKata
 {
     public class HintFieldCalculator : IHintFieldCalculator
     {
-
-
+       
+        
         public CellType[,] ConvertToArray(Field inputField)
         {
-            var hintField = inputField;
-            var row = hintField.NumberOfRows;
-            var col = hintField.NumberOfCols;
+            var row = inputField.NumberOfRows;
+            var col = inputField.NumberOfCols;
 
             var hintArray = new CellType[row, col];
             LineParser lineParser = new LineParser();
@@ -22,17 +22,32 @@ namespace MinesweeperKata
             {
                 for (int j = 0; j < col; j++)
                 {
-                    hintArray[i, j] = hintField.GetRow(i)[j];
+                    hintArray[i, j] = inputField.GetRow(i)[j];
                 }
             }
 
-            return hintArray ;
+            return hintArray;
         }
         
         //first method to calculate one field's hints from array
-        public Field CalculateDistances(string[] inputArray)
+        public string[,] CalculateNumberOfSurroundingMines(CellType[,] inputArray, Field inputField)
         {
-            throw new System.NotImplementedException();
+            var calculatedArray = new string[inputField.NumberOfRows,inputField.NumberOfCols];
+            
+            for (var i = 0; i < inputField.NumberOfRows; i++)
+            {
+                for (var j = 0; j < inputField.NumberOfCols; j++)
+                {
+                    
+                    if (inputArray[i, j] == CellType.Mine)
+                    {
+                        calculatedArray[i, j] = "*";
+                    }
+                }
+            }
+
+            return calculatedArray;
+
         }
 
         //second method for every field

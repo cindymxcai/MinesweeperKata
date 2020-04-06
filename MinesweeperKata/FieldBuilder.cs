@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace MinesweeperKata
 {
-    public class InputReader : IInputReader
+    public class FieldBuilder : IFieldBuilder
     {
 
 
