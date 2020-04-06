@@ -34,6 +34,12 @@
         <Prefer32bit>false</Prefer32bit>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="JetBrains.Lifetimes, Version=777.0.0.0, Culture=neutral, PublicKeyToken=3c74c1a6a8683340">
+          <HintPath>..\..\..\..\..\Applications\Rider 2.app\Contents\lib\ReSharperHost\JetBrains.Lifetimes.dll</HintPath>
+        </Reference>
+        <Reference Include="JetBrains.Platform.Core, Version=777.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
+          <HintPath>..\..\..\..\..\Applications\Rider 2.app\Contents\lib\ReSharperHost\JetBrains.Platform.Core.dll</HintPath>
+        </Reference>
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />

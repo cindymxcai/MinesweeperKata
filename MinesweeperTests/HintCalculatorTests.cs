@@ -34,11 +34,22 @@ namespace MinesweeperTests
             var hintFieldCalculator = new HintFieldCalculator();
             var hintArray = hintFieldCalculator.ConvertToArray(createdField);
             var calculatedField = hintFieldCalculator.CalculateNumberOfSurroundingMines(hintArray, createdField);
-            //Assert.Equal("3", calculatedField[0,0]);
+            Assert.Equal("3", calculatedField[0,0]);
             Assert.Equal("*",calculatedField[0,1]);
             Assert.Equal("*", calculatedField[1,0]);
             Assert.Equal("*", calculatedField[1,1]);
+        }
 
+        [Fact]
+        public void SurroundingValidCellsFoundCorrectly()
+        {
+            var inputReader = new FieldBuilder();
+            var fileReader = new TestFileReader(new[]{"33", ".*.", "**.", "..."});
+            var valueArray = fileReader.ReadFile();
+            var createdField = inputReader.ReadField(valueArray,0);
+            var hintFieldCalculator = new HintFieldCalculator();
+            var hintArray = hintFieldCalculator.ConvertToArray(createdField);
+            Assert.Equal(new List<(int,int)>{(0,1), (1,0), (1,1)}, hintFieldCalculator.FindSurroundingInBoundCells(0, 0, 3 , 3) );
         }
  
     }
