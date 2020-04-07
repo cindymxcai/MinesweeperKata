@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace MinesweeperKata
 {
     internal static class Program
@@ -9,13 +8,11 @@ namespace MinesweeperKata
             var fr = new FileReader();
             var file = fr.ReadFile("/Users/cindy.cai/RiderProjects/MinesweeperKata/input.txt");
             var fieldBuilder = new FieldBuilder();
-            var createdField = fieldBuilder.ReadField(file,0);
+            var allFields = fieldBuilder.ReadAllFields(file);
             var hintFieldCalculator = new HintFieldCalculator();
-            var hintArray = hintFieldCalculator.ConvertToArray(createdField);
-            var calculatedField = hintFieldCalculator.CalculateNumberOfSurroundingMines(hintArray, createdField);
+            var calculatedFields = hintFieldCalculator.CalculateAllFields(allFields);
             var outputWriter = new OutputWriter();
-            outputWriter.WriteOutput(calculatedField);
-
+            OutputWriter.WriteOutput(calculatedFields, allFields);
         }
     }
 }

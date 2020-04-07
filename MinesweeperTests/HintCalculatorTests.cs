@@ -91,5 +91,24 @@ namespace MinesweeperTests
 
         }
         
+        [Fact]
+        public void CalculateNumberOfSurroundingMinesForAllFields()
+        {
+            var fieldBuilder = new FieldBuilder();
+            var hintFieldCalculator = new HintFieldCalculator();
+
+            var fileReader = new TestFileReader(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
+            var valueArray = fileReader.ReadFile();
+            var createdFields = fieldBuilder.ReadAllFields(valueArray);
+            var allCalculatedFields = hintFieldCalculator.CalculateAllFields(createdFields);
+            Assert.Equal("*", allCalculatedFields[0][0,0]);
+            Assert.Equal("1", allCalculatedFields[0][0,1]);
+
+            Assert.Equal("1", allCalculatedFields[1][0,0]);
+            Assert.Equal("*", allCalculatedFields[1][1,0]);
+            Assert.Equal("2", allCalculatedFields[1][1,1]);
+        }
+        
+        
     }
 }

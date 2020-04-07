@@ -34,9 +34,8 @@ namespace MinesweeperTests
             var fileReader = new TestFileReader();
             var valueArray = fileReader.ReadFile("/Users/cindy.cai/RiderProjects/MinesweeperKata/input.txt");
             var createdField = fieldBuilder.ReadField(valueArray,0);
-            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Empty,CellType.Empty}, createdField.GetRow(0));
-            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Empty,CellType.Empty}, createdField.GetRow(1));
-            Assert.Equal(new List<CellType>(){CellType.Mine,CellType.Empty,CellType.Empty}, createdField.GetRow(2));
+            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Empty}, createdField.GetRow(0));
+            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Mine}, createdField.GetRow(1));
         }
         
         [Fact]
