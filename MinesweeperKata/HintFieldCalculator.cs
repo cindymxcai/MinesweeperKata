@@ -69,7 +69,7 @@ namespace MinesweeperKata
             {
                 for (var j = currentCol-1; j <= currentCol+1; j++)
                 {
-                    if (i < 0 || i > rows || j< 0 || j > cols)
+                    if (i < 0 || i >= rows || j< 0 || j >= cols)
                     { 
                     }
                     else

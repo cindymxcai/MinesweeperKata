@@ -35,10 +35,10 @@ namespace MinesweeperTests
             {
                 (0,0), (0,1), (0,2), (1,0), ( 1,2), (2,0), (2,1), (2,2)
             };
-            yield return new object[] { test1, 0, 1, 3, 3 }; // 4 rows, 4 columns
-            yield return new object[] { test2, 0, 0, 3, 3 }; // 4 rows, 4 columns
-            yield return new object[] { test3, 0, 1, 0, 5 }; //one row, 6 columns
-            yield return new object[] { test4, 1, 1, 2, 2 }; //3 rows, 3 columns
+            yield return new object[] { test1, 0, 1, 3, 3 }; // 3 rows, 3 columns
+            yield return new object[] { test2, 0, 0, 3, 3 }; // 3 rows, 3 columns
+            yield return new object[] { test3, 0, 1, 1, 5 }; //one row, 5 columns
+            yield return new object[] { test4, 1, 1, 3, 3 }; //3 rows, 3 columns
         }
 
         [Fact]
@@ -79,13 +79,16 @@ namespace MinesweeperTests
             };  
             var test2 = new []
             {
-                "22", "*.", ".*"
+                "35", "**...", "....", ".*..."
             };  
-            //why is this out of bounds???
+          
             yield return new object[] { test1, 0, 0, "3" }; 
             yield return new object[]{test1, 0,1, "*"};
-            yield return new object[] { test2, 0, 0, "2" }; 
-            yield return new object[]{test2, 0,1, "*"};
+            
+            yield return new object[] { test2, 0, 0, "*" }; 
+            yield return new object[]{test2, 1,1, "3"};
+            yield return new object[]{test2, 2,4, "0"};
+
         }
         
     }
