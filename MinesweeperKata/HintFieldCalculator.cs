@@ -1,5 +1,3 @@
-
-using System;
 using System.Collections.Generic;
 
 
@@ -28,7 +26,6 @@ namespace MinesweeperKata
             return hintArray;
         }
         
-        //first method to calculate one field's hints from array
         public string[,] CalculateNumberOfSurroundingMines(CellType[,] inputArray, Field inputField)
         {
             var calculatedArray = new string[inputField.NumberOfRows,inputField.NumberOfCols];
@@ -40,7 +37,7 @@ namespace MinesweeperKata
                     
                     if (inputArray[i, j] == CellType.Empty)
                     {
-                        int counter = 0;
+                        var counter = 0;
                         var listOfSurroundingCells = FindSurroundingInBoundCells(i, j, inputField.NumberOfRows, inputField.NumberOfCols);
                         foreach (var (item1, item2) in listOfSurroundingCells)
                         {
@@ -48,6 +45,7 @@ namespace MinesweeperKata
                             {
                                 counter++;
                             }
+                            
                         }
 
                         calculatedArray[i, j] = counter.ToString();
@@ -71,9 +69,8 @@ namespace MinesweeperKata
             {
                 for (var j = currentCol-1; j <= currentCol+1; j++)
                 {
-                    if (i < 0 || i > rows || j<0 || j > cols)
+                    if (i < 0 || i > rows || j< 0 || j > cols)
                     { 
-                        Console.WriteLine("invalid");
                     }
                     else
                     {

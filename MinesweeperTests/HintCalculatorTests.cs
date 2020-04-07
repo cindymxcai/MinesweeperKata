@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using MinesweeperKata;
 using Xunit;
@@ -40,19 +39,15 @@ namespace MinesweeperTests
             yield return new object[] { test2, 0, 0, 3, 3 }; // 4 rows, 4 columns
             yield return new object[] { test3, 0, 1, 0, 5 }; //one row, 6 columns
             yield return new object[] { test4, 1, 1, 2, 2 }; //3 rows, 3 columns
-
-            
-
-            
         }
 
         [Fact]
         public void ConvertFieldToArray()
         {
-            var inputReader = new FieldBuilder();
+            var fieldBuilder = new FieldBuilder();
             var fileReader = new TestFileReader(new[]{"22", ".*", "**"});
             var valueArray = fileReader.ReadFile();
-            var createdField = inputReader.ReadField(valueArray,0);
+            var createdField = fieldBuilder.ReadField(valueArray,0);
             var hintFieldCalculator = new HintFieldCalculator();
             var hintArray = hintFieldCalculator.ConvertToArray(createdField);
             Assert.Equal( 4, hintArray.Length);
@@ -62,21 +57,35 @@ namespace MinesweeperTests
             Assert.Equal(CellType.Mine, hintArray[1,1]);
         }
 
-        [Fact]
-
-        public void CalculateNumberOfSurroundingMines()
+        [Theory]
+        [MemberData (nameof(FileData))]
+        public void CalculateNumberOfSurroundingMines(string[] fileRead, int row, int col, string expected)
         {
-            var inputReader = new FieldBuilder();
-            var fileReader = new TestFileReader(new[]{"22", ".*", "**"});
+            var fieldBuilder = new FieldBuilder();
+            var fileReader = new TestFileReader(fileRead);
             var valueArray = fileReader.ReadFile();
-            var createdField = inputReader.ReadField(valueArray,0);
+            var createdField = fieldBuilder.ReadField(valueArray,0);
             var hintFieldCalculator = new HintFieldCalculator();
             var hintArray = hintFieldCalculator.ConvertToArray(createdField);
             var calculatedField = hintFieldCalculator.CalculateNumberOfSurroundingMines(hintArray, createdField);
-            Assert.Equal("3", calculatedField[0,0]);
-            Assert.Equal("*",calculatedField[0,1]);
-            Assert.Equal("*", calculatedField[1,0]);
-            Assert.Equal("*", calculatedField[1,1]);
+            Assert.Equal(expected, calculatedField[row,col]);
+        }
+        
+        private static IEnumerable<object[]> FileData()
+        {
+            var test1 = new []
+            {
+                "22", ".*", "**"
+            };  
+            var test2 = new []
+            {
+                "22", "*.", ".*"
+            };  
+            //why is this out of bounds???
+            yield return new object[] { test1, 0, 0, "3" }; 
+            yield return new object[]{test1, 0,1, "*"};
+            yield return new object[] { test2, 0, 0, "2" }; 
+            yield return new object[]{test2, 0,1, "*"};
         }
         
     }

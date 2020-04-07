@@ -57,6 +57,7 @@
         <Compile Include="ILineParser.cs" />
         <Compile Include="FieldBuilder.cs" />
         <Compile Include="LineParser.cs" />
+        <Compile Include="OutputWriter.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
