@@ -1,8 +1,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Util;
+
 
 namespace MinesweeperKata
 {
@@ -15,13 +14,12 @@ namespace MinesweeperKata
             var col = inputField.NumberOfCols;
 
             var hintArray = new CellType[row, col];
-            LineParser lineParser = new LineParser();
 
             //for size of row, col
             //if hintField 
-            for (int i = 0; i < row; i++)
+            for (var i = 0; i < row; i++)
             {
-                for (int j = 0; j < col; j++)
+                for (var j = 0; j < col; j++)
                 {
                     hintArray[i, j] = inputField.GetRow(i)[j];
                 }
@@ -69,11 +67,11 @@ namespace MinesweeperKata
         {
             var validCells = new List<(int, int)>();
 
-            for (var i = currentCol-1; i <= currentCol+1; i++)
+            for (var i = currentRow-1; i <= currentRow+1; i++)
             {
-                for (var j = currentRow-1; j <= currentCol+1; j++)
+                for (var j = currentCol-1; j <= currentCol+1; j++)
                 {
-                    if (i < 0 || i > cols || j<0 || j > rows)
+                    if (i < 0 || i > rows || j<0 || j > cols)
                     { 
                         Console.WriteLine("invalid");
                     }
