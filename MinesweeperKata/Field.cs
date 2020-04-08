@@ -56,8 +56,8 @@ namespace MinesweeperKata
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                throw new RowSetterException("Could not set row", e);
+
             }
             return rowList;
         }

@@ -85,9 +85,7 @@ namespace MinesweeperKata
             }
             return validCells;
         }
-
-        //TODO: method for every field
-
+        
         public List<string[,]> CalculateAllFields( IEnumerable<Field> fields)
         {
            var listOfCalculatedArrays = new List<string[,]>();
