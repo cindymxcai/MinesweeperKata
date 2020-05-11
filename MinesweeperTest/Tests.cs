@@ -15,5 +15,4 @@ namespace MinesweeperTest
             Assert.Equal( 3, y);
         }
     }
-    
 }
