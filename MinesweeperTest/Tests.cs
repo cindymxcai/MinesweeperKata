@@ -35,5 +35,16 @@ namespace MinesweeperTest
             var lineParser = new LineParser();
             Assert.Throws<InvalidInputException>(() => lineParser.GetSize(input));
         }
+        
+        [Fact]
+        public void GetFieldFromString()
+        {
+            var lineParser = new LineParser();
+            var row  = lineParser.GetFieldRow("*..");
+            Assert.Equal(CellType.Mine,row[0]());
+            Assert.Equal(CellType.Empty, row[1]);
+            Assert.Equal(CellType.Empty, row[2]);
+            
+        }
     }
 }
