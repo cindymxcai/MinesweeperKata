@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Minesweeper
 {
@@ -17,5 +18,24 @@ namespace Minesweeper
                 throw new InvalidInputException("Invalid input for Size!");
             }
         }
+
+        public List<CellType> GetFieldRow(string input)
+        {
+            var cellList = new List<CellType>();
+            
+            foreach (var cell in input)
+            {
+                switch (cell)
+                {
+                    case '*':
+                        cellList.Add(CellType.Mine);
+                        break;
+                    case '.':
+                        cellList.Add(CellType.Empty);
+                        break;
+                }
+            }
+            return cellList;
+        }        
     }
 }

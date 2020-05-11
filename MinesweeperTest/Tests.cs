@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Minesweeper;
 using Xunit;
 
@@ -36,15 +37,16 @@ namespace MinesweeperTest
             Assert.Throws<InvalidInputException>(() => lineParser.GetSize(input));
         }
         
-        [Fact]
-        public void GetFieldFromString()
+        [Theory]
+        [InlineData("*..", CellType.Mine, CellType.Empty)]
+        
+        public void GetFieldFromString(string input, CellType mine, CellType empty)
         {
             var lineParser = new LineParser();
-            var row  = lineParser.GetFieldRow("*..");
-            Assert.Equal(CellType.Mine,row[0]());
-            Assert.Equal(CellType.Empty, row[1]);
-            Assert.Equal(CellType.Empty, row[2]);
-            
+            var row  = lineParser.GetFieldRow(input);
+            Assert.Equal(mine,row[0]);
+            Assert.Equal(empty, row[1]);
+            Assert.Equal(empty, row[2]);
         }
     }
 }
