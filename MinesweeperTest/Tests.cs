@@ -1,15 +1,19 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using Minesweeper;
 using Xunit;
 
 namespace MinesweeperTest
 {
-    public class FieldTest
+    public class ParsingTest
     {
         [Fact]
-        public void SetFieldSizeShouldInitializeEmptyFieldOfGivenSize()
+        public void GivenStringInputShouldGetXandY()
         {
-            var field = new Field(3,1);
-            Assert.Equal(new List<CellType>(){CellType.Empty, CellType.Empty, CellType.Empty}, field.GetRow(0) );
+            var lineParser = new LineParser();
+            var (x,y) = lineParser.GetSize("3 3");
+            Assert.Equal( 3, x);
+            Assert.Equal( 3, y);
         }
     }
+    
 }
