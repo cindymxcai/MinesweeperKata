@@ -10,7 +10,7 @@ namespace MinesweeperTest
         [InlineData("33", 3, 3)]
         [InlineData("35", 3, 5)]
         [InlineData("18", 1, 8)]
-        public void GivenStringInputShouldGetXandY(string input, int expectedX, int expectedY)
+        public void GivenStringInputShouldGetXAndY(string input, int expectedX, int expectedY)
         {
             var lineParser = new LineParser();
             var (x,y) = lineParser.GetSize(input);
@@ -18,11 +18,22 @@ namespace MinesweeperTest
             Assert.Equal( expectedY, y);
         }
 
-        [Fact]
-        public void GivenWrongInputShouldThrowException()
+        [Theory]
+        [InlineData("")]
+        [InlineData("!")]
+        [InlineData("-1")]
+        [InlineData("w")]
+        [InlineData("L")]
+        [InlineData("  ")]
+        [InlineData(" ")]
+        [InlineData("5")]
+
+
+        
+        public void GivenWrongInputShouldThrowException(string input)
         {
             var lineParser = new LineParser();
-            Assert.Throws<InvalidInputException>(() => lineParser.GetSize("1"));
+            Assert.Throws<InvalidInputException>(() => lineParser.GetSize(input));
         }
     }
 }

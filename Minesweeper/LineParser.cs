@@ -1,6 +1,6 @@
 using System;
 
-namespace MinesweeperTest
+namespace Minesweeper
 {
     public class LineParser
     {
@@ -12,7 +12,7 @@ namespace MinesweeperTest
                 var y = int.Parse(input.Substring(1, 1));
                 return (x, y);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InvalidInputException("Invalid input for Size!");
             }

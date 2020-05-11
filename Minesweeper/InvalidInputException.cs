@@ -1,6 +1,6 @@
 using System;
 
-namespace MinesweeperTest
+namespace Minesweeper
 {
     public class InvalidInputException : Exception
     {
