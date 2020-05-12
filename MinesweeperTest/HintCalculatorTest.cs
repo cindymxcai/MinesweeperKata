@@ -68,8 +68,8 @@ namespace MinesweeperTest
         {
             var hintFieldCalculator = new HintFieldCalculator();
             var fieldCreator = new FieldCreator();
-            var allFields = fieldCreator.ReadAllFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
-            var calculatedField =  hintFieldCalculator.CalculateHints(allFields[0]);
+            fieldCreator.ReadAllFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
+            var calculatedField =  hintFieldCalculator.CalculateHints(fieldCreator.AllFields[0]);
            Assert.Equal("*", calculatedField[0,0]);
            Assert.Equal("1", calculatedField[0,1]);
 
