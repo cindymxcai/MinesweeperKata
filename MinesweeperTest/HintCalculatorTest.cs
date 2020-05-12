@@ -28,16 +28,25 @@ namespace MinesweeperTest
             yield return new object[] {test2, 2, 2};
             yield return new object[] {test3, 2, 3};
         }
-    }
-
-    public class HintFieldCalculator
-    {
-        public  CellType[,] ConvertToArray(Field readField)
+        
+        [Theory]
+        [MemberData(nameof(ListData))]
+        public void SurroundingValidCellsFoundCorrectly(List<(int,int)> expectedListOfValidCells, int currentRow, int currentCol, int rows, int cols)
         {
-            var row = readField.Row;
-            var col = readField.Col;
-            var hintArray = new CellType[row, col];
-            return hintArray;
+            var hintFieldCalculator = new HintFieldCalculator();
+            Assert.Equal(expectedListOfValidCells, hintFieldCalculator.FindSurroundingInBoundCells(currentRow, currentCol, rows , cols) );
+        }
+        
+        private static IEnumerable<object[]> ListData()
+        {
+            var test1 = new List<(int,int)> {(0,0), (0,2), (1,0), (1,1), (1,2)};
+            var test2 = new List<(int,int)> {(0,1), (1,0), (1,1)};
+            var test3 = new List<(int,int)> {(0,0), (0,2)};
+            var test4 = new List<(int, int)> {(0,0), (0,1), (0,2), (1,0), ( 1,2), (2,0), (2,1), (2,2)};
+            yield return new object[] { test1, 0, 1, 3, 3 }; 
+            yield return new object[] { test2, 0, 0, 3, 3 }; 
+            yield return new object[] { test3, 0, 1, 1, 5 }; 
+            yield return new object[] { test4, 1, 1, 3, 3 }; 
         }
     }
 }
