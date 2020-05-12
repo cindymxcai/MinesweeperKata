@@ -13,12 +13,18 @@ namespace MinesweeperTest
             Assert.Null(fieldCreator.ReadField("00"));
         }
 
-        [Fact]
-        public void FieldShouldBeMadeOfCorrectSizeGivenValidSize()
+        [Theory]
+        [InlineData("33", 3, 3)]
+        [InlineData("15", 1, 5)]
+        [InlineData("21", 2, 1)]
+        [InlineData("59", 5, 9)]
+
+        public void FieldShouldBeMadeOfCorrectSizeGivenValidSize(string input, int expectedRowSize, int expectedColsize)
         {
             var fieldCreator = new FieldCreator();
-            Assert.Equal(3, fieldCreator.ReadField("33").NumberOfRows);
-            Assert.Equal(3, fieldCreator.ReadField("33").NumberOfCols);
+            var createdField = fieldCreator.ReadField(input);
+            Assert.Equal(expectedRowSize, createdField.Row);
+            Assert.Equal(expectedColsize, createdField.Col);
         }
     }
 
@@ -27,17 +33,29 @@ namespace MinesweeperTest
         public Field ReadField(string input)
         {
             var lineParser = new LineParser();
-            var (x,y) = lineParser.GetSize(input);
-            if (x == 0 || y == 0)
+            var (row,col) = lineParser.GetSize(input);
+            if (row == 0 || col == 0)
             {
                 return null;
             }
+            else
+            {
+                var createdField = new Field(row, col);
+                return createdField;
+            }
 
-            return new Field();
         }
     }
 
     public class Field
     {
+        public readonly int Row;
+        public readonly int Col;
+
+        public Field(int row, int col)
+        {
+            Row = row;
+            Col = col;
+        }
     }
 }
