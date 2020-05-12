@@ -9,7 +9,7 @@ namespace MinesweeperTest
     {
         [Theory]
         [MemberData(nameof(InputData))]
-        public void ShouldConvertToArrayToFindSurroundingCells(string [] input, int rank, int length )
+        public void ShouldMakeArrayBasedOnFieldSize(string [] input, int rank, int length )
         {
             var hintFieldCalculator = new HintFieldCalculator();
             var fieldCreator = new FieldCreator();
@@ -27,6 +27,24 @@ namespace MinesweeperTest
             yield return new object[] {test1, 2, 9};
             yield return new object[] {test2, 2, 2};
             yield return new object[] {test3, 2, 3};
+        }
+
+        [Fact]
+        public void ShouldConvertFieldToArray()
+        {
+            var hintFieldCalculator = new HintFieldCalculator();
+            var fieldCreator = new FieldCreator();
+            fieldCreator.ReadAllFields( new []{"22", "..", "*."});
+            var hintArray = hintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]);
+            Assert.Equal( 4, hintArray.Length);
+            Assert.Equal(CellType.Empty, hintArray[0,0]);
+            Assert.Equal(CellType.Empty, hintArray[0,1]);
+            Assert.Equal(CellType.Mine, hintArray[1,0]);
+            Assert.Equal(CellType.Empty, hintArray[1,1]);
+
+
+            
+
         }
         
         [Theory]
@@ -48,5 +66,7 @@ namespace MinesweeperTest
             yield return new object[] { test3, 0, 1, 1, 5 }; 
             yield return new object[] { test4, 1, 1, 3, 3 }; 
         }
+        
+        
     }
 }
