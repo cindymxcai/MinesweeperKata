@@ -67,7 +67,6 @@ namespace MinesweeperTest
         public void ShouldGetNumberOfSurroundingMinesGivenAnyCell()
         {
             var hintFieldCalculator = new HintFieldCalculator();
-            hintFieldCalculator.CalculateNumberOfSurroundingMines();
             var fieldCreator = new FieldCreator();
             var allFields = fieldCreator.ReadAllFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
             var calculatedField =  hintFieldCalculator.CalculateHints(allFields[0]);
