@@ -41,10 +41,6 @@ namespace MinesweeperTest
             Assert.Equal(CellType.Empty, hintArray[0,1]);
             Assert.Equal(CellType.Mine, hintArray[1,0]);
             Assert.Equal(CellType.Empty, hintArray[1,1]);
-
-
-            
-
         }
         
         [Theory]
@@ -66,6 +62,20 @@ namespace MinesweeperTest
             yield return new object[] { test3, 0, 1, 1, 5 }; 
             yield return new object[] { test4, 1, 1, 3, 3 }; 
         }
+
+        [Fact]
+        public void ShouldGetNumberOfSurroundingMinesGivenAnyCell()
+        {
+            var hintFieldCalculator = new HintFieldCalculator();
+            hintFieldCalculator.CalculateNumberOfSurroundingMines();
+            var fieldCreator = new FieldCreator();
+            var allFields = fieldCreator.ReadAllFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
+            var calculatedField =  hintFieldCalculator.CalculateHints(allFields[0]);
+           Assert.Equal("*", calculatedField[0,0]);
+           Assert.Equal("1", calculatedField[0,1]);
+
+        }
+        
         
         
     }
