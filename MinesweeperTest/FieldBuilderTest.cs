@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Minesweeper;
 using Xunit;
 
@@ -19,12 +20,21 @@ namespace MinesweeperTest
         [InlineData("21", 2, 1)]
         [InlineData("59", 5, 9)]
 
-        public void FieldShouldBeMadeOfCorrectSizeGivenValidSize(string input, int expectedRowSize, int expectedColsize)
+        public void FieldShouldBeMadeOfCorrectSizeGivenValidSize(string input, int expectedRowSize, int expectedColSize)
         {
             var fieldCreator = new FieldCreator();
             var createdField = fieldCreator.ReadField(input);
             Assert.Equal(expectedRowSize, createdField.Row);
-            Assert.Equal(expectedColsize, createdField.Col);
+            Assert.Equal(expectedColSize, createdField.Col);
+        }
+
+        [Fact]
+
+        public void FieldCreatorShouldThenPopulateFieldAfterCorrectSize()
+        {
+            var fieldCreator = new FieldCreator();
+            var createdField = fieldCreator.ReadField(new []{"33", "*.", ".."});
+            Assert.Equal(new List<CellType>{CellType.Mine, CellType.Empty}, createdField.getRow[0]);
         }
     }
 
