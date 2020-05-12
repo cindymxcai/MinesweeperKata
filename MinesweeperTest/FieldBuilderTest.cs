@@ -50,7 +50,7 @@ namespace MinesweeperTest
         {
             var fieldCreator = new FieldCreator();
             var createdField = fieldCreator.ReadAllFields(new []{"11", ".", "22", "..", "*."});
-            Assert.Equal(2, fieldCreator.ReadAllFields.Count);
+            Assert.Equal(2, fieldCreator.AllFields.Count);
         }
     }
 }
