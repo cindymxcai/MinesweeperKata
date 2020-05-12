@@ -4,13 +4,13 @@ namespace Minesweeper
 {
     public class FieldCreator
     {
+        
+        public List<Field> AllFields { get; }
+
         public FieldCreator()
         {
             AllFields = new List<Field>();
         }
-
-        public List<Field> AllFields { get; }
-
         public void ReadAllFields(string[] input)
         {
             var index = 0;

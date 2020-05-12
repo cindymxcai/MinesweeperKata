@@ -7,8 +7,7 @@ namespace Minesweeper
         public readonly int Row;
         public readonly int Col; 
         private CellType[,] MinesweeperField { get;  }
-
-
+        
         public Field(int row, int col)
         {
             Row = row;

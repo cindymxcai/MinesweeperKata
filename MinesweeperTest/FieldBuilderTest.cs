@@ -7,11 +7,23 @@ namespace MinesweeperTest
 {
     public class FieldBuilderTest
     {
-        [Fact]
-        public void FieldCreatorShouldReturnNullIfRowOrColAre0()
+        [Theory]
+        [MemberData(nameof(InputDataWithZero))]
+        public void FieldCreatorShouldReturnNullIfRowOrColAre0(string [] input)
         {
             var fieldCreator = new FieldCreator();
-            Assert.Null(fieldCreator.ReadField(new[] {"03", "...", "...", "...", "00"}, 0));
+            Assert.Null(fieldCreator.ReadField( input, 0));
+        }
+
+        private static IEnumerable<object[]> InputDataWithZero()
+        {
+            var test1 = new[] {"03", "...", "...", "...", "00"};
+            var test2 = new[] {"00", ".."};
+            var test3 = new[] {"90"};
+            yield return new object[] {test1};
+            yield return new object[] {test2};
+            yield return new object[] {test3};
+
         }
 
         [Theory]
