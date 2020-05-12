@@ -6,9 +6,17 @@ namespace Minesweeper
     {
         public CellType[,] ConvertToArray(Field readField)
         {
-            var row = readField.Row;
-            var col = readField.Col;
-            var hintArray = new CellType[row, col];
+            var numberOfRows = readField.Row;
+            var numberOfCols = readField.Col;
+            var hintArray = new CellType[ numberOfRows, numberOfCols];
+            for (var currentRow = 0; currentRow < numberOfRows; currentRow++)
+            {
+
+                for (var currentCol = 0; currentCol < numberOfCols; currentCol++)
+                {
+                    hintArray[currentRow, currentCol] = readField.GetRow(currentRow)[currentCol];
+                }
+            }
             return hintArray;
         }
 

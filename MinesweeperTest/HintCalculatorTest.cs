@@ -34,7 +34,7 @@ namespace MinesweeperTest
         {
             var hintFieldCalculator = new HintFieldCalculator();
             var fieldCreator = new FieldCreator();
-            fieldCreator.ReadAllFields( new []{"22", "..", "*."});
+            fieldCreator.ReadAllFields( new []{"22", "..", "*.", "00"});
             var hintArray = hintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]);
             Assert.Equal( 4, hintArray.Length);
             Assert.Equal(CellType.Empty, hintArray[0,0]);
