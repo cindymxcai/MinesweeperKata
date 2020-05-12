@@ -23,7 +23,7 @@ namespace Minesweeper
             }
         }
 
-        public Field ReadField(string[] input, int index)
+        public static Field ReadField(string[] input, int index)
         {
             var lineParser = new LineParser();
             var (row, col) = lineParser.GetSize(input[index]);

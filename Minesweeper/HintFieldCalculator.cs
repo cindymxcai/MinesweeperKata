@@ -4,7 +4,7 @@ namespace Minesweeper
 {
     public class HintFieldCalculator
     {
-        public CellType[,] ConvertToArray(Field readField)
+        public static CellType[,] ConvertToArray(Field readField)
         {
             var numberOfRows = readField.Row;
             var numberOfCols = readField.Col;
@@ -20,7 +20,7 @@ namespace Minesweeper
             return hintArray;
         }
 
-        public IEnumerable<(int, int)> FindSurroundingInBoundCells(int currentRow, int currentCol, int rows, int cols)
+        public static IEnumerable<(int, int)> FindSurroundingInBoundCells(int currentRow, int currentCol, int rows, int cols)
         {
             var inBoundCells = new List<(int, int)>();
             for (var i = currentRow - 1; i <= currentRow + 1; i++)
@@ -41,6 +41,40 @@ namespace Minesweeper
             }
 
             return inBoundCells;
+        }
+
+        public static string[,] CalculateHints(Field inputField, CellType[,] inputArray)
+        {
+            var hintArray = new string[inputField.Row, inputField.Col];
+            
+            for (var currentRow = 0; currentRow < inputField.Row; currentRow++)
+            {
+                for (var currentCol = 0; currentCol < inputField.Col; currentCol++)
+                {
+
+                    if (inputArray[currentRow, currentCol] == CellType.Empty)
+                    {
+                        var counter = 0;
+                        var inBoundCells = FindSurroundingInBoundCells(currentRow, currentCol, inputField.Row, inputField.Col);
+                        foreach (var (x, y) in inBoundCells)
+                        {
+                            if (inputArray[x, y] == CellType.Mine)
+                            {
+                                counter++;
+                            }
+
+                        }
+                        
+                        hintArray[currentRow, currentCol] = counter.ToString();
+                    }
+                    else
+                    {
+                        hintArray[currentRow, currentCol] = "*";
+                    }
+                }
+            }
+
+            return hintArray;
         }
     }
 }

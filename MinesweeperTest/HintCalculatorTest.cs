@@ -11,10 +11,9 @@ namespace MinesweeperTest
         [MemberData(nameof(InputData))]
         public void ShouldMakeArrayBasedOnFieldSize(string [] input, int rank, int length )
         {
-            var hintFieldCalculator = new HintFieldCalculator();
             var fieldCreator = new FieldCreator();
             fieldCreator.ReadAllFields( input);
-            var fieldArray = hintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]);
+            var fieldArray = HintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]);
             Assert.Equal(rank,fieldArray.Rank);
             Assert.Equal(length,fieldArray.Length);
         }
@@ -32,10 +31,9 @@ namespace MinesweeperTest
         [Fact]
         public void ShouldConvertFieldToArray()
         {
-            var hintFieldCalculator = new HintFieldCalculator();
             var fieldCreator = new FieldCreator();
             fieldCreator.ReadAllFields( new []{"22", "..", "*.", "00"});
-            var hintArray = hintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]);
+            var hintArray = HintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]);
             Assert.Equal( 4, hintArray.Length);
             Assert.Equal(CellType.Empty, hintArray[0,0]);
             Assert.Equal(CellType.Empty, hintArray[0,1]);
@@ -47,8 +45,7 @@ namespace MinesweeperTest
         [MemberData(nameof(ListData))]
         public void SurroundingValidCellsFoundCorrectly(List<(int,int)> expectedListOfValidCells, int currentRow, int currentCol, int rows, int cols)
         {
-            var hintFieldCalculator = new HintFieldCalculator();
-            Assert.Equal(expectedListOfValidCells, hintFieldCalculator.FindSurroundingInBoundCells(currentRow, currentCol, rows , cols) );
+            Assert.Equal(expectedListOfValidCells, HintFieldCalculator.FindSurroundingInBoundCells(currentRow, currentCol, rows , cols) );
         }
         
         private static IEnumerable<object[]> ListData()
@@ -66,10 +63,10 @@ namespace MinesweeperTest
         [Fact]
         public void ShouldGetNumberOfSurroundingMinesGivenAnyCell()
         {
-            var hintFieldCalculator = new HintFieldCalculator();
             var fieldCreator = new FieldCreator();
             fieldCreator.ReadAllFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
-            var calculatedField =  hintFieldCalculator.CalculateHints(fieldCreator.AllFields[0]);
+            var inputArray =  HintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]);
+            var calculatedField =  HintFieldCalculator.CalculateHints(fieldCreator.AllFields[0], inputArray);
            Assert.Equal("*", calculatedField[0,0]);
            Assert.Equal("1", calculatedField[0,1]);
 
