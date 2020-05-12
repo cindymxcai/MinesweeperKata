@@ -13,7 +13,7 @@ namespace Minesweeper
                 var y = int.Parse(input.Substring(1, 1));
                 return (x, y);
             }
-            catch (Exception)
+            catch
             {
                 throw new InvalidInputException("Invalid input for Size!");
             }

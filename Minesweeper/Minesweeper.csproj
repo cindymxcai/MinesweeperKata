@@ -40,6 +40,8 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="CellType.cs" />
+        <Compile Include="Field.cs" />
+        <Compile Include="FieldCreator.cs" />
         <Compile Include="InvalidInputException.cs" />
         <Compile Include="LineParser.cs" />
         <Compile Include="Program.cs" />
