@@ -5,9 +5,9 @@ namespace Minesweeper
     public class Field
     {
         public readonly int Row;
-        public readonly int Col; 
-        private CellType[,] MinesweeperField { get;  }
-        
+        public readonly int Col;
+        private CellType[,] MinesweeperField { get; }
+
         public Field(int row, int col)
         {
             Row = row;
@@ -35,7 +35,6 @@ namespace Minesweeper
         public List<CellType> GetRow(int rowNumberToGet)
         {
             var row = new List<CellType>();
-
             for (var currentCol = 0; currentCol < Col; currentCol++)
             {
                 row.Add(MinesweeperField[rowNumberToGet, currentCol]);

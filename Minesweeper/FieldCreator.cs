@@ -4,18 +4,17 @@ namespace Minesweeper
 {
     public class FieldCreator
     {
-        
         public List<Field> AllFields { get; }
 
         public FieldCreator()
         {
             AllFields = new List<Field>();
         }
+
         public void ReadAllFields(string[] input)
         {
             var index = 0;
             var currentField = ReadField(input, index);
-            
             while (currentField != null)
             {
                 AllFields.Add(currentField);

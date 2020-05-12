@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Resources;
 using Minesweeper;
 using Xunit;
 
@@ -9,10 +8,10 @@ namespace MinesweeperTest
     {
         [Theory]
         [MemberData(nameof(InputDataWithZero))]
-        public void FieldCreatorShouldReturnNullIfRowOrColAre0(string [] input)
+        public void FieldCreatorShouldReturnNullIfRowOrColAre0(string[] input)
         {
             var fieldCreator = new FieldCreator();
-            Assert.Null(fieldCreator.ReadField( input, 0));
+            Assert.Null(fieldCreator.ReadField(input, 0));
         }
 
         private static IEnumerable<object[]> InputDataWithZero()
@@ -23,7 +22,6 @@ namespace MinesweeperTest
             yield return new object[] {test1};
             yield return new object[] {test2};
             yield return new object[] {test3};
-
         }
 
         [Theory]
@@ -61,7 +59,7 @@ namespace MinesweeperTest
         public void FieldCreatorShouldMakeNewFieldIfNumberRead()
         {
             var fieldCreator = new FieldCreator();
-            fieldCreator.ReadAllFields(new []{"11", ".", "22", "..", "*.", "00"});
+            fieldCreator.ReadAllFields(new[] {"11", ".", "22", "..", "*.", "00"});
             Assert.Equal(2, fieldCreator.AllFields.Count);
         }
     }
