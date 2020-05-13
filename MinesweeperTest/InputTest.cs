@@ -18,13 +18,6 @@ namespace MinesweeperTest
             Assert.Equal(new List<CellType>{CellType.Empty,CellType.Empty}, createdField.GetRow(0));
             Assert.Equal(new List<CellType>{CellType.Empty,CellType.Mine}, createdField.GetRow(1));
         }
-
-        [Fact]
-        public void NonMockInputTest()
-        {
-            var inputReader = new InputReader();
-           var input =  inputReader.ReadFile("/Users/cindy.cai/Desktop/RiderProjects/MinesweeperKata/input.txt");
-            Assert.Equal(new []{"22", "..", ".*", "00"}, input);
-        }
+        
     }
 }
