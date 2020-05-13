@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Minesweeper;
+using Moq;
 using Xunit;
 
 namespace MinesweeperTest
@@ -8,11 +11,20 @@ namespace MinesweeperTest
         public void ShouldMakeFieldFromFile()
         {
             var mock = new Mock<IInputReader>();
-            mock.setUp(input => input.ReadFile()).Returns(new[] {"22", "..", ".*", "00"});
-            var valueArray = mock.ReadFile();
-            var createdField = fieldBuilder.ReadField(valueArray,0);
-            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Empty}, createdField.GetRow(0));
-            Assert.Equal(new List<CellType>(){CellType.Empty,CellType.Mine}, createdField.GetRow(1));
+            mock.Setup(input => input.ReadFile("")).Returns(new[] {"22", "..", ".*", "00"});
+            var fieldCreator = new FieldCreator();
+            var createdField = fieldCreator.ReadField(mock.Object.ReadFile(""),0);
+            Assert.Equal(new [] {"22","..",".*","00"},mock.Object.ReadFile(""));
+            Assert.Equal(new List<CellType>{CellType.Empty,CellType.Empty}, createdField.GetRow(0));
+            Assert.Equal(new List<CellType>{CellType.Empty,CellType.Mine}, createdField.GetRow(1));
+        }
+
+        [Fact]
+        public void NonMockInputTest()
+        {
+            var inputReader = new InputReader();
+           var input =  inputReader.ReadFile("/Users/cindy.cai/Desktop/RiderProjects/MinesweeperKata/input.txt");
+            Assert.Equal(new []{"22", "..", ".*", "00"}, input);
         }
     }
 }

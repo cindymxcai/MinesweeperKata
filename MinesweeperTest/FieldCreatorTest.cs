@@ -10,7 +10,8 @@ namespace MinesweeperTest
         [MemberData(nameof(InputDataWithZero))]
         public void FieldCreatorShouldReturnNullIfRowOrColAre0(string[] input)
         {
-            Assert.Null(FieldCreator.ReadField(input, 0));
+            var fieldCreator = new FieldCreator();
+            Assert.Null(fieldCreator.ReadField(input, 0));
         }
 
         private static IEnumerable<object[]> InputDataWithZero()
@@ -28,7 +29,8 @@ namespace MinesweeperTest
         public void FieldShouldBeMadeOfCorrectSizeGivenValidSize(string[] input, int expectedRowSize,
             int expectedColSize)
         {
-            var createdField = FieldCreator.ReadField(input, 0);
+            var fieldCreator = new FieldCreator();
+            var createdField = fieldCreator.ReadField(input, 0);
             Assert.Equal(expectedRowSize, createdField.Row);
             Assert.Equal(expectedColSize, createdField.Col);
         }
@@ -48,7 +50,8 @@ namespace MinesweeperTest
         [Fact]
         public void FieldCreatorShouldThenPopulateFieldAfterCorrectSize()
         {
-            var createdField = FieldCreator.ReadField(new[] {"22", "*.", "..", "00"}, 0);
+            var fieldCreator = new FieldCreator();
+            var createdField = fieldCreator.ReadField(new[] {"22", "*.", "..", "00"}, 0);
             Assert.Equal(new List<CellType> {CellType.Mine, CellType.Empty}, createdField.GetRow(0));
         }
 
