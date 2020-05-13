@@ -53,6 +53,7 @@
     <ItemGroup>
         <Compile Include="FieldCreatorTest.cs" />
         <Compile Include="HintCalculatorTest.cs" />
+        <Compile Include="InputTest.cs" />
         <Compile Include="ParsingTest.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>

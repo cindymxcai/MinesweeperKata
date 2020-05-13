@@ -4,6 +4,16 @@ namespace Minesweeper
 {
     public class HintFieldCalculator
     {
+        
+        public List<string[,]> AllFieldsHints { get; }
+
+        public HintFieldCalculator()
+        {
+            AllFieldsHints = new List<string[,]>();
+        }
+        
+        
+
         public static CellType[,] ConvertToArray(Field readField)
         {
             var numberOfRows = readField.Row;
@@ -76,5 +86,15 @@ namespace Minesweeper
 
             return hintArray;
         }
+
+        public void CalculateAllFieldsHints(List<Field> fields)
+        {
+            foreach (var field in fields)
+            {
+                var calculatedArray = CalculateHints(field, ConvertToArray(field));
+                AllFieldsHints.Add(calculatedArray);
+            }        
+        }
+
     }
 }
