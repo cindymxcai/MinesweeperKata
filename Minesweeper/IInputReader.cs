@@ -1,4 +1,4 @@
-namespace MinesweeperTest
+namespace Minesweeper
 {
     public interface IInputReader
     {

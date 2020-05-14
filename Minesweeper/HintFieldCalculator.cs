@@ -12,19 +12,16 @@ namespace Minesweeper
             AllFieldsHints = new List<string[,]>();
         }
         
-        
-
-        public static CellType[,] ConvertToArray(Field readField)
+        public static CellType[,] ConvertToArray(Field createdField)
         {
-            var numberOfRows = readField.Row;
-            var numberOfCols = readField.Col;
+            var numberOfRows = createdField.Row;
+            var numberOfCols = createdField.Col;
             var hintArray = new CellType[ numberOfRows, numberOfCols];
             for (var currentRow = 0; currentRow < numberOfRows; currentRow++)
             {
-
                 for (var currentCol = 0; currentCol < numberOfCols; currentCol++)
                 {
-                    hintArray[currentRow, currentCol] = readField.GetRow(currentRow)[currentCol];
+                    hintArray[currentRow, currentCol] = createdField.GetRow(currentRow)[currentCol];
                 }
             }
             return hintArray;
@@ -40,12 +37,9 @@ namespace Minesweeper
                     if (i < 0 || i >= rows || j < 0 || j >= cols)
                     {
                     }
-                    else
+                    else if ((i, j) != (currentRow, currentCol))
                     {
-                        if ((i, j) != (currentRow, currentCol))
-                        {
-                            inBoundCells.Add((i, j));
-                        }
+                        inBoundCells.Add((i, j));
                     }
                 }
             }
@@ -53,9 +47,10 @@ namespace Minesweeper
             return inBoundCells;
         }
 
-        public static string[,] CalculateHints(Field inputField, CellType[,] inputArray)
+        public static string[,] CalculateHints(Field inputField)
         {
             var hintArray = new string[inputField.Row, inputField.Col];
+            var inputArray = ConvertToArray(inputField);
             
             for (var currentRow = 0; currentRow < inputField.Row; currentRow++)
             {
@@ -63,18 +58,10 @@ namespace Minesweeper
                 {
 
                     if (inputArray[currentRow, currentCol] == CellType.Empty)
-                    {
-                        var counter = 0;
-                        var inBoundCells = FindSurroundingInBoundCells(currentRow, currentCol, inputField.Row, inputField.Col);
-                        foreach (var (x, y) in inBoundCells)
-                        {
-                            if (inputArray[x, y] == CellType.Mine)
-                            {
-                                counter++;
-                            }
+                    { 
+                        var inBoundCells = FindSurroundingInBoundCells(currentRow, currentCol, inputField.Row, inputField.Col); 
+                        var counter = GetNumberOfSurroundingMines(inputArray, inBoundCells);
 
-                        }
-                        
                         hintArray[currentRow, currentCol] = counter.ToString();
                     }
                     else
@@ -87,11 +74,24 @@ namespace Minesweeper
             return hintArray;
         }
 
-        public void CalculateAllFieldsHints(List<Field> fields)
+        private static int GetNumberOfSurroundingMines(CellType[,] inputArray,IEnumerable<(int, int)> inBoundCells)
+        {
+            var counter = 0;
+            foreach (var (x, y) in inBoundCells)
+            {
+                if (inputArray[x, y] == CellType.Mine)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+        public void CalculateAllFieldsHints(IEnumerable<Field> fields)
         {
             foreach (var field in fields)
             {
-                var calculatedArray = CalculateHints(field, ConvertToArray(field));
+                var calculatedArray = CalculateHints(field);
                 AllFieldsHints.Add(calculatedArray);
             }        
         }

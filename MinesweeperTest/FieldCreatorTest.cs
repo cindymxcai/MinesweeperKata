@@ -10,8 +10,8 @@ namespace MinesweeperTest
         [MemberData(nameof(InputDataWithZero))]
         public void FieldCreatorShouldReturnNullIfRowOrColAre0(string[] input)
         {
-            var fieldCreator = new FieldCreator();
-            Assert.Null(fieldCreator.ReadField(input, 0));
+            Assert.False(FieldCreator.TryReadField(input, 0, out var createdField));
+            Assert.Null(createdField);
         }
 
         private static IEnumerable<object[]> InputDataWithZero()
@@ -29,8 +29,8 @@ namespace MinesweeperTest
         public void FieldShouldBeMadeOfCorrectSizeGivenValidSize(string[] input, int expectedRowSize,
             int expectedColSize)
         {
-            var fieldCreator = new FieldCreator();
-            var createdField = fieldCreator.ReadField(input, 0);
+            var isFieldCreated = FieldCreator.TryReadField(input, 0, out var createdField);
+            Assert.True(isFieldCreated);
             Assert.Equal(expectedRowSize, createdField.Row);
             Assert.Equal(expectedColSize, createdField.Col);
         }
@@ -50,8 +50,8 @@ namespace MinesweeperTest
         [Fact]
         public void FieldCreatorShouldThenPopulateFieldAfterCorrectSize()
         {
-            var fieldCreator = new FieldCreator();
-            var createdField = fieldCreator.ReadField(new[] {"22", "*.", "..", "00"}, 0);
+            var isFieldCreated = FieldCreator.TryReadField(new[] {"22", "*.", "..", "00"}, 0, out var createdField);
+            Assert.True(isFieldCreated);
             Assert.Equal(new List<CellType> {CellType.Mine, CellType.Empty}, createdField.GetRow(0));
         }
 
@@ -59,8 +59,8 @@ namespace MinesweeperTest
         public void FieldCreatorShouldMakeNewFieldIfNumberRead()
         {
             var fieldCreator = new FieldCreator();
-            fieldCreator.ReadAllFields(new[] {"11", ".", "22", "..", "*.", "00"});
-            Assert.Equal(2, fieldCreator.AllFields.Count);
+           var allFields = fieldCreator.ReadAllFields(new[] {"11", ".", "22", "..", "*.", "00"});
+            Assert.Equal(2, allFields.Count);
         }
     }
 }

@@ -4,24 +4,23 @@ using System.Linq;
 
 namespace Minesweeper
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
             var inputReader = new InputReader(); 
             var input = inputReader.ReadFile("/Users/cindy.cai/Desktop/RiderProjects/MinesweeperKata/input.txt");
             var fieldCreator = new FieldCreator();
-            fieldCreator.ReadAllFields(input);
+            var allFields = fieldCreator.ReadAllFields(input);
             var hintFieldCalculator = new HintFieldCalculator();
-            hintFieldCalculator.CalculateAllFieldsHints(fieldCreator.AllFields);
-            var outputWriter = new OutputWriter();
-            outputWriter.WriteOutput(hintFieldCalculator.AllFieldsHints,fieldCreator.AllFields);
+            hintFieldCalculator.CalculateAllFieldsHints(allFields);
+            OutputWriter.WriteOutput(hintFieldCalculator.AllFieldsHints, allFields);
         }
     }
 
-    internal class OutputWriter
+    internal static class OutputWriter
     {
-        public  void WriteOutput(IEnumerable<string[,]> calculatedArray, List<Field> fields)
+        public static void WriteOutput(IEnumerable<string[,]> calculatedArray, IEnumerable<Field> fields)
         {
             var counter = 1;
             var zippedFields = fields.Zip(calculatedArray, (field, hint) => new {field, hint});

@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 
 namespace Minesweeper
 {
     public class LineParser
     {
-        public (int,int) GetSize(string input)
+        public static (int,int) GetSize(string input)
         {
             try
             {
@@ -19,7 +18,7 @@ namespace Minesweeper
             }
         }
 
-        public List<CellType> GetFieldRow(string input)
+        public static List<CellType> GetFieldRow(string input)
         {
             var cellList = new List<CellType>();
             

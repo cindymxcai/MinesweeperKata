@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Minesweeper;
+﻿using Minesweeper;
 using Xunit;
 
 namespace MinesweeperTest
@@ -14,8 +11,7 @@ namespace MinesweeperTest
         [InlineData("18", 1, 8)]
         public void GivenStringInputShouldGetXAndY(string input, int expectedX, int expectedY)
         {
-            var lineParser = new LineParser();
-            var (x, y) = lineParser.GetSize(input);
+            var (x, y) = LineParser.GetSize(input);
             Assert.Equal(expectedX, x);
             Assert.Equal(expectedY, y);
         }
@@ -31,16 +27,14 @@ namespace MinesweeperTest
         [InlineData("5")]
         public void GivenWrongInputShouldThrowException(string input)
         {
-            var lineParser = new LineParser();
-            Assert.Throws<InvalidInputException>(() => lineParser.GetSize(input));
+            Assert.Throws<InvalidInputException>(() => LineParser.GetSize(input));
         }
 
         [Theory]
         [InlineData("*..", CellType.Mine, CellType.Empty)]
         public void GetFieldFromString(string input, CellType mine, CellType empty )
         {
-            var lineParser = new LineParser();
-            var row = lineParser.GetFieldRow(input);
+            var row = LineParser.GetFieldRow(input);
             Assert.Equal(mine, row[0]);
             Assert.Equal(empty, row[1]);
             Assert.Equal(empty, row[2]);

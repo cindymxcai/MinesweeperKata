@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Reflection.Emit;
 using Minesweeper;
 using Xunit;
 
@@ -12,8 +11,8 @@ namespace MinesweeperTest
         public void ShouldMakeArrayBasedOnFieldSize(string [] input, int rank, int length )
         {
             var fieldCreator = new FieldCreator();
-            fieldCreator.ReadAllFields( input);
-            var fieldArray = HintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]);
+            var allFields = fieldCreator.ReadAllFields( input);
+            var fieldArray = HintFieldCalculator.ConvertToArray(allFields[0]);
             Assert.Equal(rank,fieldArray.Rank);
             Assert.Equal(length,fieldArray.Length);
         }
@@ -32,8 +31,8 @@ namespace MinesweeperTest
         public void ShouldConvertFieldToArray()
         {
             var fieldCreator = new FieldCreator();
-            fieldCreator.ReadAllFields( new []{"22", "..", "*.", "00"});
-            var hintArray = HintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]);
+            var allFields = fieldCreator.ReadAllFields( new []{"22", "..", "*.", "00"});
+            var hintArray = HintFieldCalculator.ConvertToArray(allFields[0]);
             Assert.Equal( 4, hintArray.Length);
             Assert.Equal(CellType.Empty, hintArray[0,0]);
             Assert.Equal(CellType.Empty, hintArray[0,1]);
@@ -64,9 +63,8 @@ namespace MinesweeperTest
         public void ShouldGetNumberOfSurroundingMinesGivenAnyCell()
         {
             var fieldCreator = new FieldCreator();
-            fieldCreator.ReadAllFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
-            var inputArray =  HintFieldCalculator.ConvertToArray(fieldCreator.AllFields[0]); 
-            var calculatedField =  HintFieldCalculator.CalculateHints(fieldCreator.AllFields[0], inputArray);
+            var allFields = fieldCreator.ReadAllFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
+            var calculatedField =  HintFieldCalculator.CalculateHints(allFields[0]);
             Assert.Equal("*", calculatedField[0,0]);
             Assert.Equal("1", calculatedField[0,1]);
         }
@@ -76,8 +74,8 @@ namespace MinesweeperTest
         {
             var fieldCreator = new FieldCreator();
             var hintFieldCalculator = new HintFieldCalculator();
-            fieldCreator.ReadAllFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
-            hintFieldCalculator.CalculateAllFieldsHints(fieldCreator.AllFields);
+            var allFields = fieldCreator.ReadAllFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
+            hintFieldCalculator.CalculateAllFieldsHints(allFields);
             Assert.Equal(2,hintFieldCalculator.AllFieldsHints.Count);
             
             Assert.Equal("*", hintFieldCalculator.AllFieldsHints[0][0,0]);
