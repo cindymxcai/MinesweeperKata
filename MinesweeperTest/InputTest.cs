@@ -12,11 +12,11 @@ namespace MinesweeperTest
         {
             var mock = new Mock<IInputReader>();
             mock.Setup(input => input.ReadFile("")).Returns(new[] {"22", "..", ".*", "00"});
-            var isFieldCreated = FieldCreator.TryReadField(mock.Object.ReadFile(""),0, out var createdField);
+            var fieldCreator = new FieldCreator();
+            var fields = fieldCreator.ReadFields(mock.Object.ReadFile(""));
             Assert.Equal(new [] {"22","..",".*","00"},mock.Object.ReadFile(""));
-            Assert.True(isFieldCreated);
-            Assert.Equal(new List<CellType>{CellType.Empty,CellType.Empty}, createdField.GetRow(0));
-            Assert.Equal(new List<CellType>{CellType.Empty,CellType.Mine}, createdField.GetRow(1));
+            Assert.Equal(new List<CellType>{CellType.Empty,CellType.Empty}, fields[0].GetRow(0));
+            Assert.Equal(new List<CellType>{CellType.Empty,CellType.Mine}, fields[0].GetRow(1));
         }
         
     }
