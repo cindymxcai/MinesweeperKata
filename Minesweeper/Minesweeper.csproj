@@ -64,6 +64,7 @@
         <Compile Include="InputReader.cs" />
         <Compile Include="InvalidInputException.cs" />
         <Compile Include="LineParser.cs" />
+        <Compile Include="ILineRetriever.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>

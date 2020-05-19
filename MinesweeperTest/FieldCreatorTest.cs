@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Minesweeper;
 using Xunit;
 
@@ -11,7 +10,8 @@ namespace MinesweeperTest
         public void FieldCreatorShouldMakeNewFieldIfNumberRead()
         {
             var fieldCreator = new FieldCreator();
-           var allFields = fieldCreator.ReadFields(new[] {"11", ".", "22", "..", "*.", "00"});
+            var lineRetriever = new LineRetriever(new[] {"11", ".", "22", "..", "*.", "00"});
+           var allFields = fieldCreator.ReadFields(lineRetriever);
             Assert.Equal(2, allFields.Count);
         }
     }

@@ -4,15 +4,15 @@ namespace Minesweeper
 {
     public class FieldCreator
     {
-        public List<Field> ReadFields(string[] input)
+        public List<Field> ReadFields(ILineRetriever lineRetriever)
         {
             var fieldData = new List<List<CellType>>();
-            var fields =  CreateInitialFields(input, fieldData);
+            var fields =  CreateInitialFields(lineRetriever, fieldData);
             PopulateFields(fields, fieldData);
             return fields;
         }
 
-        private static void PopulateFields(List<Field> allFields, IReadOnlyList<List<CellType>> fieldData)
+        private static void PopulateFields(IEnumerable<Field> allFields, IReadOnlyList<List<CellType>> fieldData)
         {
             var index = 0;
             foreach (var field in allFields)
@@ -25,15 +25,15 @@ namespace Minesweeper
             }
         }
 
-        private List<Field> CreateInitialFields(IReadOnlyList<string> input, ICollection<List<CellType>> fieldData)
+        private List<Field> CreateInitialFields(ILineRetriever lineRetriever, ICollection<List<CellType>> fieldData)
         {
-            var index = 0;
             var allFields = new List<Field>();
             while (true)
             {
-                if (int.TryParse(input[index], out _))
+                var line = lineRetriever.GetNextLine();
+                if (int.TryParse(line, out _))
                 {
-                    var (row, col) = LineParser.GetSize(input[index]);
+                    var (row, col) = LineParser.GetSize(line);
                     if (row == 0 || col == 0)
                     {
                         break;
@@ -43,10 +43,9 @@ namespace Minesweeper
                 }
                 else
                 {
-                    fieldData.Add(LineParser.GetFieldRow(input[index]));
+                    fieldData.Add(LineParser.GetFieldRow(line));
                 }
 
-                index++;
             }
             return allFields;
         }

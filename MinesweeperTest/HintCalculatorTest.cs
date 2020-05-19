@@ -11,7 +11,8 @@ namespace MinesweeperTest
         public void ShouldMakeArrayBasedOnFieldSize(string [] input, int rank, int length )
         {
             var fieldCreator = new FieldCreator();
-            var allFields = fieldCreator.ReadFields( input);
+            var lineRetriever = new LineRetriever(input);
+            var allFields = fieldCreator.ReadFields( lineRetriever);
             var fieldArray = HintFieldCalculator.ConvertToArray(allFields[0]);
             Assert.Equal(rank,fieldArray.Rank);
             Assert.Equal(length,fieldArray.Length);
@@ -31,7 +32,8 @@ namespace MinesweeperTest
         public void ShouldConvertFieldToArray()
         {
             var fieldCreator = new FieldCreator();
-            var allFields = fieldCreator.ReadFields( new []{"22", "..", "*.", "00"});
+            var lineRetriever = new LineRetriever(new []{"22", "..", "*.", "00"});
+            var allFields = fieldCreator.ReadFields( lineRetriever);
             var hintArray = HintFieldCalculator.ConvertToArray(allFields[0]);
             Assert.Equal( 4, hintArray.Length);
             Assert.Equal(CellType.Empty, hintArray[0,0]);
@@ -63,7 +65,8 @@ namespace MinesweeperTest
         public void ShouldGetNumberOfSurroundingMinesGivenAnyCell()
         {
             var fieldCreator = new FieldCreator();
-            var allFields = fieldCreator.ReadFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
+            var lineRetriever = new LineRetriever(new[] {"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
+            var allFields = fieldCreator.ReadFields(lineRetriever);
             var calculatedField =  HintFieldCalculator.CalculateHints(allFields[0]);
             Assert.Equal("*", calculatedField[0,0]);
             Assert.Equal("1", calculatedField[0,1]);
@@ -74,7 +77,8 @@ namespace MinesweeperTest
         {
             var fieldCreator = new FieldCreator();
             var hintFieldCalculator = new HintFieldCalculator();
-            var allFields = fieldCreator.ReadFields(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
+            var lineRetriever = new LineRetriever(new []{"22", "*.", "..", "33", "...", "*..", ".*.", "00"});
+            var allFields = fieldCreator.ReadFields(lineRetriever);
             hintFieldCalculator.CalculateAllFieldsHints(allFields);
             Assert.Equal(2,hintFieldCalculator.AllFieldsHints.Count);
             

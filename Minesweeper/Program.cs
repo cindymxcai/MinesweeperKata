@@ -11,7 +11,8 @@ namespace Minesweeper
             var inputReader = new InputReader(); 
             var input = inputReader.ReadFile("/Users/cindy.cai/Desktop/RiderProjects/MinesweeperKata/input.txt");
             var fieldCreator = new FieldCreator();
-            var allFields = fieldCreator.ReadFields(input);
+            var lineRetriever = new LineRetriever(input);
+            var allFields = fieldCreator.ReadFields(lineRetriever);
             var hintFieldCalculator = new HintFieldCalculator();
             hintFieldCalculator.CalculateAllFieldsHints(allFields);
             OutputWriter.WriteOutput(hintFieldCalculator.AllFieldsHints, allFields);
